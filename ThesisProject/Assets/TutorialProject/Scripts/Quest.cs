@@ -15,6 +15,8 @@ public class Quest
     public bool isActive;
     public List <Goal> goals;
 
+    public AudioClip questCompleteSound;
+
     public void Init()
     {
         isActive = true;
@@ -42,8 +44,23 @@ public class Quest
     {
         isActive = false;
         Debug.Log("Quest Completed! Reward!");
+
+        //För ljud, hittade ingen bra ljud fil för questcompletion, så jag kommenterar ut det för nu.
+        /*
+        AudioSource audio = GameObject.FindObjectOfType<AudioSource>();
+
+        if (audio != null && questCompleteSound != null)
+        {
+            audio.PlayOneShot(questCompleteSound);
+        }*/
+
+
+        // Gold belöning 
+        PlayerStats playerStats = GameObject.FindObjectOfType<PlayerStats>();
+        if (playerStats != null)
+        {
+            playerStats.AddGold(reward);
+        }
+
     }
-
-
-
 }
